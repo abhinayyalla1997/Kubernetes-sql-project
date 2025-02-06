@@ -45,7 +45,21 @@ This project demonstrates the creation of a Kubernetes (K8s) deployment on AWS E
       --approve
 
 - **Apply all YAML manifest files**:
-To apply all the Kubernetes manifest files in the `manifests` directory, use the following command:
-```bash
-kubectl apply -f manifests
+  To apply all the Kubernetes manifest files in the `manifests` directory, use the following command:
+  ```bash
+  kubectl apply -f manifests
 
+- **Get all K8s objects and services**:
+  To get all Kubernetes objects and services (including services, namespaces, pods, and persistent volume claims):
+  ```bash
+  kubectl get svc,ns,pods,pvc
+
+- **Get nodes in your cluster**:
+  To view all nodes in your Kubernetes cluster with additional details:
+  ```bash
+  kubectl get nodes -o wide
+
+- **Run MySQL client on a pod**:
+  To check users and db
+  ```bash
+  kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -pdbpassword11
