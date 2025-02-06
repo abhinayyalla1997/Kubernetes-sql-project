@@ -43,3 +43,9 @@ This project demonstrates the creation of a Kubernetes (K8s) deployment on AWS E
       --region <region-code> \
       --cluster <cluster-name> \
       --approve
+
+### Apply all YAML manifest files:
+To apply all the Kubernetes manifest files in the `manifests` directory, use the following command:
+```bash
+kubectl apply -f manifests
+
