@@ -1,53 +1,45 @@
-# Kubernetes-sql-project
-deployment of frontend usermanagement and backend with sql 
+# Kubernetes Project: User Management with MySQL Backend
 
-# Kubernetes Project with Frontend User Management and MySQL Backend
+This project demonstrates the creation of a Kubernetes (K8s) deployment on AWS EKS, featuring a frontend user management system and a backend MySQL database to store user information. The project is designed to be easily implemented by others. All the necessary manifest files and resources are shared here for you to explore and deploy yourself.
 
 ## Project Overview
 
-This project sets up a Kubernetes (K8s) environment with a frontend user management system and a backend MySQL database to store user information. Postman is used to test the API endpoints. All necessary manifest files are provided for easy implementation.
+- **Frontend**: User management system
+- **Backend**: MySQL database to store all user information
+- **Testing**: Postman was used for testing the functionality
 
 ## Steps to Implement
 
-1. **IAM OIDC Provider Setup**  
-   As I am using AWS EKS, I created an IAM OIDC provider to grant access to my pods for AWS services.
+1. **Set up AWS EKS Cluster**:
+   - Create an IAM OIDC provider to allow your pods to access AWS services.
+   
+2. **Storage Configuration**:
+   - Install the EBS CBI driver to use AWS Elastic Block Store (EBS) as persistent storage for your K8s pods.
+   
+3. **IAM Role Policy**:
+   - Create a policy and attach it to the IAM role for your EKS nodes to grant the necessary permissions.
+   
+4. **Kubernetes Manifests**:
+   - Created manifest files for various K8s resources including services, deployments, user management, and config settings.
 
-2. **EBS Storage Setup**  
-   Installed the EBS CBI driver to enable the use of AWS EBS as storage for Kubernetes pods.
+5. **Testing**:
+   - Used Postman to test the API endpoints.
 
-3. **IAM Role Policy Creation**  
-   Created a policy and attached it to the IAM role for EKS nodes to ensure proper permissions.
+6. **Namespace and Domain Setup**:
+   - Set up namespaces and added domains to organize resources in your cluster.
 
-4. **Manifest Files**  
-   Created the following Kubernetes manifest files:
-   - **Service**
-   - **Deployment**
-   - **User Management**
-   - **Config**
+7. **Optional TLS Certificate**:
+   - You can add a TLS certificate using Certbot. Follow the instructions here to set up the certificate:
+   [Certbot Instructions](https://certbot.eff.org/instructions?ws=nginx&os=snap)
 
-5. **Postman Testing**  
-   Used Postman to test API endpoints and ensure the system works as expected.
+8. **Reference Files**:
+   - Screenshots and manifest files are provided for reference.
 
-6. **References**  
-   Included screenshots and manifest files for reference.
+## Commands Used
 
-## Main Commands Used in This Project
-
-```bash
-# Associate IAM OIDC provider to EKS
-eksctl utils associate-iam-oidc-provider \
-    --region <region-code> \
-    --cluster <cluster-name> \
-    --approve
-
-# Apply all manifest files in the 'manifests' folder
-kubectl apply -f manifests/
-
-# Get information about all services, namespaces, pods, and PVCs
-kubectl get svc,ns,pods,pvc
-
-# Get detailed information about nodes
-kubectl get nodes -o wide
-
-# Test MySQL connection with a MySQL client pod
-kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -pdbpassword11
+- **Associate IAM OIDC provider with the cluster**:
+  ```bash
+  eksctl utils associate-iam-oidc-provider \
+      --region <region-code> \
+      --cluster <cluster-name> \
+      --approve
